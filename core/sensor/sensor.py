@@ -9,8 +9,9 @@ from conf import settings
 
 # 发送mqtt消息到服务器
 def send_mqtt(message):
-    publish.single(settings.topic, message, hostname=settings.hostname)
-    print("send message success")
+    publish.single(settings.TOPIC, message, hostname=settings.HOSTNAME,
+                   auth={'username': settings.USERNAME, 'password': settings.PASSWORD})
+    print("send message success" + message)
 
 
 # 获取温湿度
@@ -31,22 +32,19 @@ def get_fine_particulate_matter():
 
 
 # 主循环
-def sensor():
+def sensor(user_id):
     while True:
         # 获取温湿度
         temperature, humidity = get_temperature_humidity()
-        print(temperature)
-        print(humidity)
         # 获取PM2.5指数
-        fine_particulate_matter = get_fine_particulate_matter()
+        # fine_particulate_matter = get_fine_particulate_matter()
         if temperature > -30:
             # 合成数据
             message = {
-                'temperature': str(temperature),
-                'humidity': str(humidity),
-                'fine_particulate_matter': str(fine_particulate_matter)
+                "userId": user_id,
+                'temp': str(temperature),
+                'humidity': str(humidity)
             }
             # 发送环境数据
-            # send_mqtt(message)
-            print(message)
+            send_mqtt(str(message))
         time.sleep(3)

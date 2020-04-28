@@ -10,6 +10,8 @@ import core.sensor.sensor as sensor
 def start():
     print("Start to 4 process...")
     try:
+        # 获取用户信息
+        user_id = "1"
         # 启动显示视图线程
         print("Start the view html process")
         p_viw_html = mp.Process(target=view_html.viw_html)
@@ -24,7 +26,7 @@ def start():
         p_snowboy.start()
         # 启动传感器线程
         print("Start the sensor process")
-        p_sensor = mp.Process(target=sensor.sensor)
+        p_sensor = mp.Process(target=sensor.sensor, args=user_id)
         p_sensor.start()
     except Exception as e:
         print("Unexpected error:", e)

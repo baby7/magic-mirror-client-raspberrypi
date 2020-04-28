@@ -12,7 +12,9 @@ CHANNEL = 17
 
 # 发送MQTT消息的topic及hostname
 TOPIC = 'topic_magic_mirror_sensor'
-HOSTNAME = 'localhost'
+HOSTNAME = '62.234.97.198'
+USERNAME = 'sensor_admin'
+PASSWORD = 'sensor_admin1'
 # #####################################传感器结束#########################################
 
 
