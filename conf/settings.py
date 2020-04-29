@@ -46,30 +46,6 @@ SENSITIVITY = 0.5
 # 控制命令关键词列表
 COMMAND_LIST = ['笑话', '故事', '天气', '新闻', '成语', '星座', '脑筋急转弯', '歇后语', '绕口令', '顺口溜', '邮编']
 
-# 图灵API密钥
-TULING_TURING_KEY = '59e01b844ffc48759e29efa928d974e7'
-TULING_URL = 'http://openapi.tuling123.com/openapi/api/v2'
-TULING_HEADERS = {'Content-Type': 'application/json;charset=UTF-8'}
-# 图灵机器人参数
-TULING_DATA = {
-    'reqType': 0,
-    'perception': {
-        'inputText': {
-            'text': ''
-        },
-        'selfInfo': {
-            'location': {
-                'city': '乌鲁木齐',
-                'street': '西山路'
-            }
-        }
-    },
-    'userInfo': {
-        'apiKey': '',
-        'userId': 'starky'
-    }
-}
-
 # 百度语音API密钥
 BAIDU_APP_ID = '16375302'
 BAIDU_API_KEY = 'bcFIgL82GlzMxsr72fSmv08e'
@@ -89,4 +65,7 @@ BAIDU_PIT = 5
 BAIDU_VOL = 5
 # 百度语音合成语言
 BAIDU_LANGUAGE = 'zh'
+
+# 后端接口
+MANAGE_URL = 'http://62.234.97.198:8005/admin/corpus/chat'
 # ####################################语音对话结束#########################################

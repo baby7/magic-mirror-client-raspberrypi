@@ -22,7 +22,7 @@ def start():
         p_face_detection.start()
         # 启动语音识别线程
         print("Start the speech recognition process")
-        p_snowboy = mp.Process(target=snowboy.snowboy)
+        p_snowboy = mp.Process(target=snowboy.snowboy, args=user_id)
         p_snowboy.start()
         # 启动传感器线程
         print("Start the sensor process")

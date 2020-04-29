@@ -7,6 +7,7 @@ from core.dialogue import snowboydecoder
 
 
 interrupted = False
+my_user_id = 1
 
 
 def signal_handler(signal, frame):
@@ -23,13 +24,15 @@ def interrupt_callback():
 def speech_recognition():
     t = td.Thread(target=snowboydecoder.play_audio_file)    # 声音响应
     t.start()
-    dialogue.dialogue()                 # 语音识别程序
+    global my_user_id
+    dialogue.dialogue(my_user_id)                 # 语音识别程序
 
 
 # 主程序
-def snowboy():
-    global interrupted
+def snowboy(user_id):
+    global interrupted, my_user_id
     model = settings.MODEL
+    my_user_id = user_id
 
     # capture SIGINT signal, e.g., Ctrl+C
     signal.signal(signal.SIGINT, signal_handler)
