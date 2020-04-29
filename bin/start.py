@@ -11,4 +11,5 @@ print(__file__)  # 返回当前程序的相对路径/
 sys.path.append(BASE_DIR)
 from core import main
 
-main.start()
+if __name__ == '__main__':
+    main.start()

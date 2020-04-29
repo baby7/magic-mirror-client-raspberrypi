@@ -24,7 +24,7 @@ PASSWORD = 'sensor_admin1'
 EXECUTABLE_PATH = '/usr/lib/chromium-browser/chromedriver'
 
 # 浏览器要打开的地址
-DRIVER_URL = 'https://www.baidu.com'
+DRIVER_URL = 'http://62.234.97.198:8004/'
 # #####################################浏览器结束#########################################
 
 
