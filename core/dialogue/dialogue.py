@@ -82,6 +82,15 @@ def speak(text=""):
             file.write(result)
 
 
+# 发送消息
+def dialogue_success(text="", queue=None):
+    json_data = {
+        "type": "main_text",
+        "text": text
+    }
+    queue.put(json_data)
+
+
 # 使用PyGame播放map3格式文件
 def play():
     audio_name = settings.DIALOGUE_DIR + "audio.mp3"
@@ -94,9 +103,10 @@ def play():
 
 
 # 对话
-def dialogue(user_id):
+def dialogue(user_id, queue):
     rec()                                       # 录音
     request = listen()                          # 语音转为文本
-    response = chat(request,user_id)                    # 智能对话
+    response = chat(request, user_id)           # 智能对话
+    dialogue_success(response, queue)           # 显示文本
     speak(response)                             # 语音合成
     play()                                      # 播放

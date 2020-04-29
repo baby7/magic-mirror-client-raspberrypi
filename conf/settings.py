@@ -21,7 +21,7 @@ PASSWORD = 'sensor_admin1'
 #
 # #####################################浏览器开始#########################################
 # 浏览器驱动文件位置
-EXECUTABLE_PATH = '/usr/lib/chromium-browser/chromedriver'
+EXECUTABLE_PATH = r'C:\Users\xiang\AppData\Local\Google\Chrome\Application\chromedriver.exe'
 
 # 浏览器要打开的地址
 DRIVER_URL = 'http://62.234.97.198:8004/'

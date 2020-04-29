@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import multiprocessing as mp
+from multiprocessing import Process, Queue
 
 import core.view_html.view_html as view_html
 import core.face_detection.face_detection as face_detection
@@ -12,21 +12,23 @@ def start():
     try:
         # 获取用户信息
         user_id = "1"
+        # 队列
+        q = Queue()
         # 启动显示视图线程
         print("Start the view html process")
-        p_viw_html = mp.Process(target=view_html.viw_html)
+        p_viw_html = Process(target=view_html.viw_html, args=(q,))
         p_viw_html.start()
         # 启动人脸识别线程
         print("Start the face recognition process")
-        p_face_detection = mp.Process(target=face_detection.face_detection)
+        p_face_detection = Process(target=face_detection.face_detection)
         p_face_detection.start()
         # 启动语音识别线程
         print("Start the speech recognition process")
-        p_snowboy = mp.Process(target=snowboy.snowboy, args=user_id)
+        p_snowboy = Process(target=snowboy.snowboy, args=(user_id, q))
         p_snowboy.start()
         # 启动传感器线程
         print("Start the sensor process")
-        p_sensor = mp.Process(target=sensor.sensor, args=user_id)
+        p_sensor = Process(target=sensor.sensor, args=user_id)
         p_sensor.start()
     except Exception as e:
         print("Unexpected error:", e)
