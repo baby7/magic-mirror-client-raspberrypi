@@ -14,7 +14,16 @@ driver = None
 # 修改页面欢迎语
 def change_main_word(word=""):
     js = 'document.getElementsByClassName("title-msg")[0].innerHTML ="' + word + '"'
-    driver.execute_script(js)  # 执行js语句
+    driver.execute_script(js)
+
+
+# 修改当前环境数据
+def change_sensor_data(data={}):
+    temp = data['temp']
+    humidity = data['humidity']
+    # TODO
+    js = temp + humidity
+    driver.execute_script(js)
 
 
 # 主循环
@@ -35,3 +44,5 @@ def viw_html(queue):
         json_data = queue.get()
         if json_data['type'] is 'main_text':
             change_main_word(json_data['text'])
+        elif json_data['type'] is 'sensor_data':
+            change_sensor_data(json_data['data'])

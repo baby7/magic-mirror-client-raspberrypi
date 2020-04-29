@@ -6,6 +6,8 @@ from lib import RPi_TH
 from lib import RPi_FPM
 from conf import settings
 
+queue = None
+
 
 # 发送mqtt消息到服务器
 def send_mqtt(message):
@@ -31,8 +33,19 @@ def get_fine_particulate_matter():
     return fine_particulate_matter
 
 
+# 发送消息
+def sensor_success(data={}):
+    json_data = {
+        "type": "sensor_data",
+        "data": data
+    }
+    queue.put(json_data)
+
+
 # 主循环
-def sensor(user_id):
+def sensor(user_id, new_queue):
+    global queue
+    queue = new_queue
     while True:
         # 获取温湿度
         temperature, humidity = get_temperature_humidity()
@@ -45,6 +58,8 @@ def sensor(user_id):
                 'temp': str(temperature),
                 'humidity': str(humidity)
             }
+            # 发送面板数据
+            sensor_success(message)
             # 发送环境数据
             send_mqtt(str(message))
         time.sleep(3)
