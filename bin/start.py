@@ -9,7 +9,6 @@ print(os.path.abspath(__file__))  # 返回当前程序的绝对路径\
 print(__file__)  # 返回当前程序的相对路径/
 # 添加环境变量
 sys.path.append(BASE_DIR)
-from conf import settings
 from core import main
 
 main.start()

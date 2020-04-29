@@ -40,10 +40,6 @@ def snowboy(user_id):
     detector = snowboydecoder.HotwordDetector(model, sensitivity=settings.SENSITIVITY)
     print('Listening... Press Ctrl+C to exit')
 
-    # main loop
-    # detector.start(detected_callback=snowboydecoder.play_audio_file,
-    #                interrupt_check=interrupt_callback,
-    #                sleep_time=0.03)
     detector.start(detected_callback=speech_recognition,
                    interrupt_check=interrupt_callback,
                    sleep_time=0.03)

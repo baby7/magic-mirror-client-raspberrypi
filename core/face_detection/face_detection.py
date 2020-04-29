@@ -43,11 +43,6 @@ def face_detection():
         if ret is True:
             # 输出当前帧
             recognition(frame)
-            # frame = cv2.resize(frame, (0, 0), fx=1.5, fy=1.5, interpolation=cv2.INTER_NEAREST)
-            # cv2.imshow('Face recognition', frame)
-            # 键盘按 Q 退出
-            # if (cv2.waitKey(1) & 0xFF) == ord('q'):
-            #     break
             time.sleep(1)
         else:
             break
