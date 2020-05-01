@@ -62,17 +62,19 @@ def listen():
 
 # 命令判断
 def commend(text=""):
-    if text is "打开开关":
+    if text == "打开开关":
         if check:
             domain = 'switch'
             kapi.turn_on_all(domain)
         kapi.endscript()
+        speak("已经" + text)
         return True
-    if text is "关闭开关":
+    if text == "关闭开关":
         if check:
             domain = 'switch'
             kapi.turn_off_all(domain)
         kapi.endscript()
+        speak("已经" + text)
         return True
     return False
 
@@ -128,8 +130,8 @@ def play():
 def dialogue(user_id, queue):
     rec()                                       # 录音
     request = listen()                          # 语音转为文本
-    if not commend(str(requests)):
+    if not commend(request):
         response = chat(request, user_id)           # 智能对话
         dialogue_success(response, queue)           # 显示文本
         speak(response)                             # 语音合成
-        play()                                      # 播放
+    play()                                          # 播放
