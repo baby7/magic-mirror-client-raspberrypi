@@ -6,8 +6,13 @@ import speech_recognition as sr
 import requests
 import pygame
 import time
+from lib import KRUNKHOMEAPI as kapi
+import homeassistant.remote as koapi
 
 from conf import settings
+
+kapi.api = koapi.API('127.0.0.1', '', 8123)  # HA-API:domain, password, port
+check = kapi.apicheck()
 
 
 # 百度语音API密钥
@@ -53,6 +58,23 @@ def listen():
     result_text = result["result"][0]
     print("you say: " + result_text)
     return result_text
+
+
+# 命令判断
+def commend(text=""):
+    if text is "打开开关":
+        if check:
+            domain = 'switch'
+            kapi.turn_on_all(domain)
+        kapi.endscript()
+        return True
+    if text is "关闭开关":
+        if check:
+            domain = 'switch'
+            kapi.turn_off_all(domain)
+        kapi.endscript()
+        return True
+    return False
 
 
 # 智能对话
@@ -106,7 +128,8 @@ def play():
 def dialogue(user_id, queue):
     rec()                                       # 录音
     request = listen()                          # 语音转为文本
-    response = chat(request, user_id)           # 智能对话
-    dialogue_success(response, queue)           # 显示文本
-    speak(response)                             # 语音合成
-    play()                                      # 播放
+    if not commend(str(requests)):
+        response = chat(request, user_id)           # 智能对话
+        dialogue_success(response, queue)           # 显示文本
+        speak(response)                             # 语音合成
+        play()                                      # 播放
