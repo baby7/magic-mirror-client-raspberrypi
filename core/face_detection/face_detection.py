@@ -62,5 +62,3 @@ def face_detection():
     # 释放资源
     cap.release()
     cv2.destroyAllWindows()
-
-face_detection()
