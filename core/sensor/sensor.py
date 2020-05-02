@@ -56,7 +56,8 @@ def sensor(user_id, new_queue):
             message = {
                 "userId": user_id,
                 'temp': str(temperature),
-                'humidity': str(humidity)
+                'humidity': str(humidity),
+                "createTime": int(round(time.time() * 1000))
             }
             # 发送面板数据
             sensor_success(message)
