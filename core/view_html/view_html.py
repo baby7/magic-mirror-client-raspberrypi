@@ -39,10 +39,10 @@ def viw_html(queue):
     driver.fullscreen_window()
     time.sleep(3)
     # size = driver.get_window_size()
-    # m.click(1261, 30)
+    m.click(1261, 30)
     while True:
         json_data = queue.get()
-        if json_data['type'] is 'main_text':
+        if json_data['type'] == 'main_text':
             change_main_word(json_data['text'])
-        elif json_data['type'] is 'sensor_data':
+        elif json_data['type'] == 'sensor_data':
             change_sensor_data(json_data['data'])
