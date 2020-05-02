@@ -17,8 +17,6 @@ check = kapi.apicheck()
 
 # 百度语音API密钥
 client = AipSpeech(settings.BAIDU_APP_ID, settings.BAIDU_API_KEY, settings.BAIDU_SECRET_KEY)
-# 命令控制关键词列表
-command_list = settings.COMMAND_LIST
 
 
 # 敏感词判断函数

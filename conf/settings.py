@@ -44,9 +44,6 @@ MODEL = DIALOGUE_DIR + 'magicmirror.pmdl'
 # 热词唤醒灵敏度
 SENSITIVITY = 0.5
 
-# 控制命令关键词列表
-COMMAND_LIST = ['笑话', '故事', '天气', '新闻', '成语', '星座', '脑筋急转弯', '歇后语', '绕口令', '顺口溜', '邮编']
-
 # 百度语音API密钥
 BAIDU_APP_ID = '16375302'
 BAIDU_API_KEY = 'bcFIgL82GlzMxsr72fSmv08e'
