@@ -38,7 +38,8 @@ FOCUS_FACE = "haarcascade_frontalface_alt"
 #
 # ####################################语音对话开始#########################################
 # 语音唤醒模型位置
-MODEL = DIALOGUE_DIR + 'resources/models/snowboy.umdl'
+# MODEL = DIALOGUE_DIR + 'resources/models/snowboy.umdl'
+MODEL = DIALOGUE_DIR + 'magicmirror.pmdl'
 
 # 热词唤醒灵敏度
 SENSITIVITY = 0.5
