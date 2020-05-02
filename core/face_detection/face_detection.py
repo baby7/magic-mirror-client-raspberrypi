@@ -31,7 +31,7 @@ def recognition(image):
         cv2.imwrite(face_path, image)
         emotion_recognition(face_path)
     else:
-        print("Null")
+        print("no face detected")
 
 
 # 进行情绪识别
