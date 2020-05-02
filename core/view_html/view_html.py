@@ -21,8 +21,9 @@ def change_main_word(word=""):
 def change_sensor_data(data={}):
     temp = data['temp']
     humidity = data['humidity']
-    # TODO
-    js = temp + humidity
+    js = 'document.getElementById("hide_temp").innerHTML ="' + temp + '"'
+    driver.execute_script(js)
+    js = 'document.getElementById("hide_humidity").innerHTML ="' + humidity + '"'
     driver.execute_script(js)
 
 
