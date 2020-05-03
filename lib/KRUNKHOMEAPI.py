@@ -105,3 +105,17 @@ def call_mpd(service, message):
 
 def get_state(switch_name) -> str:
     return remote.get_state(api, switch_name)
+
+
+# ************switch start*************
+domain = 'switch'
+switch_name = 'switch.'
+
+
+def open_switch(name):
+    turn_on(domain, switch_name + name)
+
+
+def close_switch(name):
+    turn_off(domain, switch_name + name)
+# *************switch end**************

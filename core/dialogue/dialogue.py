@@ -60,17 +60,13 @@ def listen():
 
 # 命令判断
 def commend(text=""):
-    if text == "打开开关":
-        if check:
-            domain = 'switch'
-            kapi.turn_on_all(domain)
-        kapi.endscript()
-        speak("已经" + text)
-        return True
-    if text == "关闭开关":
-        if check:
-            domain = 'switch'
-            kapi.turn_off_all(domain)
+    if check:
+        # ************switch start*************
+        if text == "打开开关":
+            kapi.open_switch("test")
+        if text == "关闭开关":
+            kapi.close_switch("test")
+        # *************switch end**************
         kapi.endscript()
         speak("已经" + text)
         return True
