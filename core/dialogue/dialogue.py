@@ -18,6 +18,10 @@ check = kapi.apicheck()
 # 百度语音API密钥
 client = AipSpeech(settings.BAIDU_APP_ID, settings.BAIDU_API_KEY, settings.BAIDU_SECRET_KEY)
 
+switch_list = [
+    {"name": "开关", "switch_name": "test"}
+]
+
 
 # 敏感词判断函数
 def filter_words(ask, answer):
@@ -62,10 +66,11 @@ def listen():
 def commend(text=""):
     if check:
         # ************switch start*************
-        if text == "打开开关":
-            kapi.open_switch("test")
-        if text == "关闭开关":
-            kapi.close_switch("test")
+        for switch in switch_list:
+            if text == ("打开" + switch['name']):
+                kapi.open_switch(switch['switch_name'])
+            if text == ("关闭" + switch['name']):
+                kapi.close_switch(switch['switch_name'])
         # *************switch end**************
         kapi.endscript()
         speak("已经" + text)
