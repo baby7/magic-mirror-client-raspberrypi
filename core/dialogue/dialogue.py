@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from aip import AipSpeech
 from mutagen.mp3 import MP3
-import speech_recognition as sr
+import speech_recognition
 import requests
 import pygame
 import time
@@ -13,6 +13,8 @@ from conf import settings
 
 kapi.api = koapi.API('127.0.0.1', '', 8123)  # HA-API:domain, password, port
 check = kapi.apicheck()
+
+DIALOGUE_DIR = settings.DIALOGUE_DIR
 
 
 # 百度语音API密钥
@@ -34,26 +36,26 @@ def filter_words(ask, answer):
 
 
 # 加载过滤词库
-with open(settings.DIALOGUE_DIR + 'filtered_words.txt', 'r', encoding='utf8') as f:
+with open(DIALOGUE_DIR + 'filtered_words.txt', 'r', encoding='utf8') as f:
     filtered_words = f.read()
 filtered_words_list = filtered_words.split('\n')
 
 
 # 使用语音识别进行录制
-def rec(rate=16000):
-    r = sr.Recognizer()
-    with sr.Microphone(sample_rate=rate) as source:
-        print("please say something")
-        audio = r.listen(source=source)
-    with open(settings.DIALOGUE_DIR + "recording.wav", "wb") as file:
-        file.write(audio.get_wav_data())
+def record(rate=16000):
+    r = speech_recognition.Recognizer()
+    with speech_recognition.Microphone(sample_rate=rate) as sour:
+        print("未检测到声音")
+        audio = r.listen(source=sour)
+    with open(DIALOGUE_DIR + "recording.wav", "wb") as recordFile:
+        recordFile.write(audio.get_wav_data())
     print("recording completed")
 
 
 # 使用百度语音作为STT引擎
 def listen():
-    with open(settings.DIALOGUE_DIR + 'recording.wav', 'rb') as file:
-        audio_data = file.read()
+    with open(DIALOGUE_DIR + 'recording.wav', 'rb') as recordFile:
+        audio_data = recordFile.read()
     result = client.asr(audio_data, 'wav', 16000, {
         'dev_pid': 1536,
     })
@@ -101,8 +103,8 @@ def speak(text=""):
         'vol': settings.BAIDU_VOL
     })
     if not isinstance(result, dict):
-        with open(settings.DIALOGUE_DIR + 'audio.mp3', 'wb') as file:
-            file.write(result)
+        with open(DIALOGUE_DIR + 'audio.mp3', 'wb') as audioFile:
+            audioFile.write(result)
 
 
 # 发送消息
@@ -116,7 +118,7 @@ def dialogue_success(text="", queue=None):
 
 # 使用PyGame播放map3格式文件
 def play():
-    audio_name = settings.DIALOGUE_DIR + "audio.mp3"
+    audio_name = DIALOGUE_DIR + "audio.mp3"
     audio = MP3(audio_name)
     pygame.mixer.init()
     pygame.mixer.music.load(audio_name)
@@ -127,10 +129,10 @@ def play():
 
 # 对话
 def dialogue(user_id, queue):
-    rec()                                       # 录音
-    request = listen()                          # 语音转为文本
-    if not commend(request):
+    record()                                        # 录音
+    request = listen()                              # 录音转为文本
+    if not commend(request):                        # 判断是否为命令
         response = chat(request, user_id)           # 智能对话
         dialogue_success(response, queue)           # 显示文本
         speak(response)                             # 语音合成
-    play()                                          # 播放
+    play()                                          # 播放结果
