@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 import paho.mqtt.publish as publish
+import requests
 import time
 
 from lib import RPi_TH
 from lib import RPi_FPM
+from lib import configurationUtil
 from conf import settings
 
 queue = None
@@ -42,10 +44,30 @@ def sensor_success(data={}):
     queue.put(json_data)
 
 
+# 检查及修改hass核心配置文件
+def check_update_configuration():
+    url = 'http://62.234.97.198:8005/admin/home/page'
+    res = requests.get(url)
+    data = res.json()
+    switch_list = []
+    home_list = data["data"]["records"]
+    for home in home_list:
+        switch = {
+            "platform": home["platform"],
+            "name": home["name"],
+            "host": home["host"],
+            "token": home["token"],
+            "model": home["model"]
+        }
+        switch_list.append(switch)
+    configurationUtil.edit_switch_all(switch_list)
+
+
 # 主循环
 def sensor(user_id, new_queue):
     global queue
     queue = new_queue
+    num = 0
     while True:
         # 获取温湿度
         temperature, humidity = get_temperature_humidity()
@@ -63,4 +85,8 @@ def sensor(user_id, new_queue):
             sensor_success(message)
             # 发送环境数据
             send_mqtt(str(message))
+        num = num + 1
+        if num == 3:
+            num = 0
+            check_update_configuration()
         time.sleep(3)

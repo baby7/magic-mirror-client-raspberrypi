@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from ruamel import yaml
+import requests
 
 yaml_path = 'configuration.yaml'
 
@@ -55,6 +56,13 @@ def edit_switch(platform, name, host, token, model):
             switch['host'] = host
             switch['token'] = token
             switch['model'] = model
+    set_config(yaml_config)
+
+
+# 修改开关[所有]
+def edit_switch_all(switch_list):
+    yaml_config = get_config()
+    yaml_config['switch'] = switch_list
     set_config(yaml_config)
 
 
