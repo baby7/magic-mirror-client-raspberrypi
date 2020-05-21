@@ -46,8 +46,7 @@ def sensor_success(data={}):
 
 # 检查及修改hass核心配置文件
 def check_update_configuration():
-    url = 'http://62.234.97.198:8005/admin/home/page'
-    res = requests.get(url)
+    res = requests.get(settings.HOME_LIST)
     data = res.json()
     switch_list = []
     home_list = data["data"]["records"]

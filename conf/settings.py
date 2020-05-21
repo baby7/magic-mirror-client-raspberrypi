@@ -15,6 +15,9 @@ TOPIC = 'topic_magic_mirror_sensor'
 HOSTNAME = '62.234.97.198'
 USERNAME = 'sensor_admin'
 PASSWORD = 'sensor_admin1'
+
+# 获取智能家居列表url
+HOME_LIST = "http://62.234.97.198:8005/admin/home/page"
 # #####################################传感器结束#########################################
 
 
