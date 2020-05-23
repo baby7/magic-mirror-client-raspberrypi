@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from multiprocessing import Process, Queue
+from lib import configurationUtil
 
 import core.view_html.view_html as view_html
 import core.face_detection.face_detection as face_detection
@@ -10,8 +11,8 @@ import core.sensor.sensor as sensor
 def start():
     print("Start to 4 process...")
     try:
-        # 获取用户信息
-        user_id = "1"
+        # 获取用户id
+        user_id = configurationUtil.get_user_id()
         # 队列
         queue = Queue()
         # 启动显示视图线程

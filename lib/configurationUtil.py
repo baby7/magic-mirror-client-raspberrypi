@@ -2,9 +2,17 @@
 # -*- coding: utf-8 -*-
 
 from ruamel import yaml
-import requests
 
 yaml_path = 'configuration.yaml'
+config_yaml_path = '../db/db.yaml'
+
+
+# 获取userId
+def get_user_id():
+    yaml_file = open(config_yaml_path, 'r', encoding='utf8')
+    yaml_config = yaml.round_trip_load(yaml_file)
+    yaml_file.close()
+    return yaml_config['userId']
 
 
 # 获取配置文件
