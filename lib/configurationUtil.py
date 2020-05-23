@@ -18,7 +18,11 @@ def get_config():
 # 写入配置文件
 def set_config(yaml_config):
     with open(yaml_path, 'w+', encoding='utf8') as outfile:
-        yaml.dump(yaml_config, outfile, Dumper=yaml.RoundTripDumper, block_seq_indent=2, default_flow_style=False)
+        yaml.dump(yaml_config, outfile,
+                  Dumper=yaml.RoundTripDumper,
+                  block_seq_indent=2,
+                  default_flow_style=False,
+                  allow_unicode=True)
     yaml_file = open(yaml_path, 'r', encoding='utf8')
     yaml_config = yaml_file.read() \
         .replace("  name:", "    name:")  \
