@@ -46,7 +46,7 @@ def sensor_success(data={}):
 
 # 检查及修改hass核心配置文件
 def check_update_configuration(user_id):
-    res = requests.get(settings.HOME_LIST + user_id)
+    res = requests.get(settings.HOME_LIST + str(user_id))
     data = res.json()
     switch_list = []
     home_list = data["data"]["records"]
