@@ -71,12 +71,15 @@ def commend(text=""):
         for switch in switch_list:
             if text == ("打开" + switch['name']):
                 kapi.open_switch(switch['switch_name'])
+                kapi.endscript()
+                speak("已经" + text)
+                return True
             if text == ("关闭" + switch['name']):
                 kapi.close_switch(switch['switch_name'])
+                kapi.endscript()
+                speak("已经" + text)
+                return True
         # *************switch end**************
-        kapi.endscript()
-        speak("已经" + text)
-        return True
     return False
 
 
