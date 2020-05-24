@@ -51,14 +51,17 @@ def emotion_recognition(face_path):
 
 def face_detection():
     cap = cv2.VideoCapture(0)               # 从摄像头中取得视频
+    face_ignore_num = 0
     while cap.isOpened():
         ret, frame = cap.read()             # 读取帧摄像头
-        if ret is True:
-            # 输出当前帧
-            recognition(frame)
-        else:
-            break
-        time.sleep(3)
+        face_ignore_num = face_ignore_num + 1
+        if face_ignore_num > 100:
+            face_ignore_num = 0
+            if ret is True:
+                # 输出当前帧
+                recognition(frame)
+            else:
+                break
     # 释放资源
     cap.release()
     cv2.destroyAllWindows()
