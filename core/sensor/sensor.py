@@ -45,8 +45,8 @@ def sensor_success(data={}):
 
 
 # 检查及修改hass核心配置文件
-def check_update_configuration():
-    res = requests.get(settings.HOME_LIST)
+def check_update_configuration(user_id):
+    res = requests.get(settings.HOME_LIST + user_id)
     data = res.json()
     switch_list = []
     home_list = data["data"]["records"]
@@ -87,5 +87,5 @@ def sensor(user_id, new_queue):
         num = num + 1
         if num == 3:
             num = 0
-            check_update_configuration()
+            check_update_configuration(user_id)
         time.sleep(3)

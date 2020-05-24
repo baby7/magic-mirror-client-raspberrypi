@@ -17,7 +17,7 @@ USERNAME = 'sensor_admin'
 PASSWORD = 'sensor_admin1'
 
 # 获取智能家居列表url
-HOME_LIST = "http://62.234.97.198:8005/admin/home/page"
+HOME_LIST = "http://62.234.97.198:8005/admin/home/page?userId="
 # #####################################传感器结束#########################################
 
 
