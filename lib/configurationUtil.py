@@ -3,7 +3,7 @@
 
 from ruamel import yaml
 
-yaml_path = 'configuration.yaml'
+yaml_path = '/home/pi/.homeassistant/configuration.yaml'
 config_yaml_path = '../db/db.yaml'
 
 
