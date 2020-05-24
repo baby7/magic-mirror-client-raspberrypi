@@ -20,10 +20,16 @@ DIALOGUE_DIR = settings.DIALOGUE_DIR
 # 百度语音API密钥
 client = AipSpeech(settings.BAIDU_APP_ID, settings.BAIDU_API_KEY, settings.BAIDU_SECRET_KEY)
 
-switch_list = [
-    {"name": "开关", "switch_name": "test"}
-]
+# switch_list = [
+#     {"name": "开关", "switch_name": "test"}
+# ]
 
+res = requests.get(settings.HOME_LIST)
+data = res.json()
+switch_list = []
+home_list = data["data"]["records"]
+for home in home_list:
+    switch_list.append({"name": home['word'], "switch_name": home['name']})
 
 # 敏感词判断函数
 def filter_words(ask, answer):

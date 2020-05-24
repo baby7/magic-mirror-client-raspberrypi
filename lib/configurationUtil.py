@@ -33,6 +33,7 @@ def set_config(yaml_config):
                   allow_unicode=True)
     yaml_file = open(yaml_path, 'r', encoding='utf8')
     yaml_config = yaml_file.read() \
+        .replace("  word:", "    word:")  \
         .replace("  name:", "    name:")  \
         .replace("  host:", "    host:")  \
         .replace("  token:", "    token:")\
@@ -45,11 +46,12 @@ def set_config(yaml_config):
 
 
 # 添加开关
-def add_switch(platform, name, host, token, model):
+def add_switch(platform, word, name, host, token, model):
     yaml_config = get_config()
     yaml_config['switch'].append(
         {
             "platform": platform,
+            "word": word,
             "name": name,
             "host": host,
             "token": token,
@@ -60,11 +62,12 @@ def add_switch(platform, name, host, token, model):
 
 
 # 修改开关[根据名字]
-def edit_switch(platform, name, host, token, model):
+def edit_switch(platform, word, name, host, token, model):
     yaml_config = get_config()
     for switch in yaml_config['switch']:
         if switch['name'] == name:
             switch['platform'] = platform
+            switch['word'] = word
             switch['host'] = host
             switch['token'] = token
             switch['model'] = model
