@@ -65,9 +65,13 @@ def listen():
     result = client.asr(audio_data, 'wav', 16000, {
         'dev_pid': 1536,
     })
-    result_text = result["result"][0]
-    print("you say: " + result_text)
-    return result_text
+    if result['err_msg']:
+        result_text = '没有听清您说的什么'
+        return result_text
+    else:
+        result_text = result["result"][0]
+        print("you say: " + result_text)
+        return result_text
 
 
 # 命令判断
