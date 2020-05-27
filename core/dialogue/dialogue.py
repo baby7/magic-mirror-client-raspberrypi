@@ -48,10 +48,11 @@ filtered_words_list = filtered_words.split('\n')
 
 
 # 使用语音识别进行录制
-def record(rate=16000):
+def record(queue):
     r = speech_recognition.Recognizer()
-    with speech_recognition.Microphone(sample_rate=rate) as sour:
+    with speech_recognition.Microphone(sample_rate=16000) as sour:
         print("未检测到声音")
+        dialogue_success("请说", queue)
         audio = r.listen(source=sour)
     with open(DIALOGUE_DIR + "recording.wav", "wb") as recordFile:
         recordFile.write(audio.get_wav_data())
@@ -75,7 +76,7 @@ def listen():
 
 
 # 命令判断
-def commend(text=""):
+def commend(queue, text=""):
     if check:
         # ************switch start*************
         for switch in switch_list:
@@ -83,11 +84,13 @@ def commend(text=""):
                 kapi.open_switch(switch['switch_name'])
                 kapi.endscript()
                 speak("已经" + text)
+                dialogue_success("已经" + text, queue)
                 return True
             if text == ("关闭" + switch['name']):
                 kapi.close_switch(switch['switch_name'])
                 kapi.endscript()
                 speak("已经" + text)
+                dialogue_success("已经" + text, queue)
                 return True
         # *************switch end**************
     return False
@@ -142,9 +145,9 @@ def play():
 
 # 对话
 def dialogue(user_id, queue):
-    record()                                        # 录音
+    record(queue)                                   # 录音
     request = listen()                              # 录音转为文本
-    if not commend(request):                        # 判断是否为命令
+    if not commend(queue, request):                 # 判断是否为命令
         response = chat(request, user_id)           # 智能对话
         dialogue_success(response, queue)           # 显示文本
         speak(response)                             # 语音合成
