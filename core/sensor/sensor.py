@@ -7,6 +7,11 @@ from lib import RPi_TH
 from lib import RPi_FPM
 from lib import configurationUtil
 from conf import settings
+from lib import KRUNKHOMEAPI as kapi
+import homeassistant.remote as koapi
+
+kapi.api = koapi.API('127.0.0.1', '', 8123)  # HA-API:domain, password, port
+check = kapi.apicheck()
 
 queue = None
 
@@ -44,7 +49,7 @@ def sensor_success(data={}):
     queue.put(json_data)
 
 
-# 检查及修改hass核心配置文件
+# 检查及修改hass核心配置文件 && 存储用户配置到json文件
 def check_update_configuration(user_id):
     res = requests.get(settings.HOME_LIST + str(user_id))
     data = res.json()
@@ -59,7 +64,12 @@ def check_update_configuration(user_id):
             "model": home["model"]
         }
         switch_list.append(switch)
-    configurationUtil.edit_switch_all(switch_list)
+    configurationUtil.edit_switch_all(switch_list)\
+
+
+# 存储用户配置到json文件
+def save_user_data(data):
+    print("save")
 
 
 # 主循环
@@ -84,8 +94,11 @@ def sensor(user_id, new_queue):
             sensor_success(message)
             # 发送环境数据
             send_mqtt(str(message))
-        num = num + 1
-        if num == 3:
-            num = 0
-            check_update_configuration(user_id)
-        time.sleep(3)
+            # 如果温度大于三十度或者湿度大于70%就打开空调
+            if check and (temperature > 30 or humidity > 70):
+                # 空调没在开着就打开空调
+                if not kapi.get_switch_state('airconditioning'):
+                    kapi.open_switch('airconditioning')
+                    kapi.endscript()
+        check_update_configuration(user_id)
+        time.sleep(60)
