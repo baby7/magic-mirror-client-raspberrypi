@@ -20,10 +20,6 @@ DIALOGUE_DIR = settings.DIALOGUE_DIR
 # 百度语音API密钥
 client = AipSpeech(settings.BAIDU_APP_ID, settings.BAIDU_API_KEY, settings.BAIDU_SECRET_KEY)
 
-# switch_list = [
-#     {"name": "开关", "switch_name": "test"}
-# ]
-
 res = requests.get(settings.HOME_LIST)
 data = res.json()
 switch_list = []
@@ -65,12 +61,12 @@ def listen():
     result = client.asr(audio_data, 'wav', 16000, {
         'dev_pid': 1536,
     })
-    if result['err_msg']:
-        result_text = '没有听清您说的什么'
-        return result_text
-    else:
+    if result['err_msg'] == 'success.':
         result_text = result["result"][0]
         print("you say: " + result_text)
+        return result_text
+    else:
+        result_text = '没有听清您说的什么'
         return result_text
 
 
@@ -142,9 +138,9 @@ def play():
 
 # 对话
 def dialogue(user_id, queue):
-    record()                                   # 录音
+    record()                                        # 录音
     request = listen()                              # 录音转为文本
-    if not commend(request):                 # 判断是否为命令
+    if not commend(request):                        # 判断是否为命令
         response = chat(request, user_id)           # 智能对话
         dialogue_success(response, queue)           # 显示文本
         speak(response)                             # 语音合成
