@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 from multiprocessing import Process, Queue
 from lib import configurationUtil
+import time
 
 import core.view_html.view_html as view_html
-import core.face_detection.face_detection as face_detection
+# import core.face_detection.face_detection as face_detection
 import core.dialogue.snowboy as snowboy
 import core.sensor.sensor as sensor
+import core.hass.hass as hass
 
 
 def start():
@@ -15,14 +17,20 @@ def start():
         user_id = configurationUtil.get_user_id()
         # 队列
         queue = Queue()
+        # 启动hass线程
+        print("Start the Home Assistant process")
+        p_hass = Process(target=hass.hass)
+        p_hass.start()
+        # 暂停一分钟等待hass启动
+        time.sleep(60)
         # 启动显示视图线程
         print("Start the view html process")
         p_viw_html = Process(target=view_html.viw_html, args=(queue,))
         p_viw_html.start()
         # 启动人脸识别线程
-        print("Start the face recognition process")
-        p_face_detection = Process(target=face_detection.face_detection)
-        p_face_detection.start()
+        # print("Start the face recognition process")
+        # p_face_detection = Process(target=face_detection.face_detection)
+        # p_face_detection.start()
         # 启动语音识别线程
         print("Start the speech recognition process")
         p_snowboy = Process(target=snowboy.snowboy, args=(user_id, queue))
