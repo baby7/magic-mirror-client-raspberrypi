@@ -118,4 +118,11 @@ def open_switch(name):
 
 def close_switch(name):
     turn_off(domain, switch_name + name)
+
+
+def get_switch_state(name):
+    if str(get_state(switch_name + name).state) == 'off':
+        return False
+    else:
+        return True
 # *************switch end**************
