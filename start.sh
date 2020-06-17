@@ -1,4 +1,4 @@
-/home/pi/.local/bin/hass -parameters &
+/home/pi/.local/bin/hass &
 sleep 30
-cd client-raspberrypi/bin/
+cd /home/pi/client-raspberrypi/bin/
 python3 start.py
