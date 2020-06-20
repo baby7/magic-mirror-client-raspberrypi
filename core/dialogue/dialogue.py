@@ -73,7 +73,7 @@ def listen():
 
 # 命令判断
 def commend(text=""):
-    # ************switch start*************
+    # ************ switch start *************
     for switch in switch_list:
         if text == ("打开" + switch['name']):
             hassapi.open_switch(switch['switch_name'])
@@ -83,7 +83,18 @@ def commend(text=""):
             hassapi.close_switch(switch['switch_name'])
             speak("已经" + text)
             return True
-    # *************switch end**************
+    # ************* switch end  **************
+    # ************* light start **************
+    for switch in switch_list:
+        if text == (switch['name'] + "最高亮度"):
+            hassapi.set_light_brightness(switch['name'], 255)
+        if text == (switch['name'] + "最低亮度"):
+            hassapi.set_light_brightness(switch['name'], 3)
+        if text == (switch['name'] + "最高色温"):
+            hassapi.set_light_color_temp(switch['name'], 175)
+        if text == (switch['name'] + "最低色温"):
+            hassapi.set_light_color_temp(switch['name'], 333)
+    # ************* light end   **************
     return False
 
 

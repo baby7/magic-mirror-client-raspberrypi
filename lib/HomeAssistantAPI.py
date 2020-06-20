@@ -50,28 +50,6 @@ def set_light_color_temp(entity_id, color_temp):
         call_service("light", "toggle", json)
 
 
-# 同时设置灯的亮度和色温 - 亮度[3-255],色温[175-333]
-def set_light(entity_id, brightness, color_temp):
-    json_brightness = {
-        "entity_id": "light." + entity_id,
-        "brightness_pct": brightness,
-    }
-    json_color_temp = {
-        "entity_id": "light." + entity_id,
-        "color_temp": color_temp
-    }
-    json = {
-        "entity_id": "light." + entity_id,
-        "brightness_pct": brightness,
-        "color_temp": color_temp
-    }
-    if get_state("light." + entity_id)["state"] == "on":
-        call_service("light", "toggle", json_brightness)
-        call_service("light", "toggle", json_color_temp)
-    else:
-        call_service("light", "toggle", json)
-
-
 # 打开开关
 def open_switch(entity_id):
     json = {
