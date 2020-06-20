@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from pymouse import PyMouse
+# from pymouse import PyMouse
 import time
 
 from conf import settings
@@ -29,7 +29,7 @@ def change_sensor_data(data={}):
 
 # 主循环
 def viw_html(queue):
-    m = PyMouse()
+    # m = PyMouse()
     option = Options()
     # option.add_argument('disable_infobars')   # 与下面一行效果相同（去除浏览器出现的受控制提示），新版本已失效
     option.add_experimental_option('excludeSwitches', ['enable-automation'])
@@ -40,7 +40,7 @@ def viw_html(queue):
     driver.fullscreen_window()
     time.sleep(3)
     # size = driver.get_window_size()
-    m.click(1261, 30)
+    # m.click(1261, 30)
     while True:
         json_data = queue.get()
         if json_data['type'] == 'main_text':
