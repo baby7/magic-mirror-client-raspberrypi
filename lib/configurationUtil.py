@@ -33,12 +33,17 @@ def set_config(yaml_config):
                   allow_unicode=True)
     yaml_file = open(yaml_path, 'r', encoding='utf8')
     yaml_config = yaml_file.read() \
-        .replace("  word:", "    word:")  \
-        .replace("  name:", "    name:")  \
-        .replace("  host:", "    host:")  \
-        .replace("  token:", "    token:")\
-        .replace("  model:", "    model:")\
-        .replace("  name: Home", "name: Home")
+        .replace("  name:",             "    name:")  \
+        .replace("  host:",             "    host:")  \
+        .replace("  token:",            "    token:")\
+        .replace("  model:",            "    model:")\
+        .replace("  hosts:",            "    hosts:")\
+        .replace("  interval_seconds:", "    interval_seconds:")\
+        .replace("  exclude:",          "    exclude:")\
+        .replace("    - 192.168.3.1",   "      - 192.168.3.1")\
+        .replace("  consider_home",     "    consider_home")\
+        .replace("  targer_sensor:",    "    targer_sensor:")\
+        .replace("  scan_interval:",    "    scan_interval:")
     yaml_file.close()
     yaml_file = open(yaml_path, 'w', encoding='utf8')
     yaml_file.write(yaml_config)
