@@ -6,13 +6,14 @@ import speech_recognition
 import requests
 import pygame
 import time
-from lib import KRUNKHOMEAPI as kapi
-import homeassistant.remote as koapi
+# from lib import KRUNKHOMEAPI as kapi
+# import homeassistant.remote as koapi
+from lib import HomeAssistantAPI as hassapi
 
 from conf import settings
 
-kapi.api = koapi.API('127.0.0.1', '', 8123)  # HA-API:domain, password, port
-check = kapi.apicheck()
+# kapi.api = koapi.API('127.0.0.1', '', 8123)  # HA-API:domain, password, port
+# check = kapi.apicheck()
 
 DIALOGUE_DIR = settings.DIALOGUE_DIR
 
@@ -72,20 +73,17 @@ def listen():
 
 # 命令判断
 def commend(text=""):
-    if check:
-        # ************switch start*************
-        for switch in switch_list:
-            if text == ("打开" + switch['name']):
-                kapi.open_switch(switch['switch_name'])
-                kapi.endscript()
-                speak("已经" + text)
-                return True
-            if text == ("关闭" + switch['name']):
-                kapi.close_switch(switch['switch_name'])
-                kapi.endscript()
-                speak("已经" + text)
-                return True
-        # *************switch end**************
+    # ************switch start*************
+    for switch in switch_list:
+        if text == ("打开" + switch['name']):
+            hassapi.open_switch(switch['switch_name'])
+            speak("已经" + text)
+            return True
+        if text == ("关闭" + switch['name']):
+            hassapi.close_switch(switch['switch_name'])
+            speak("已经" + text)
+            return True
+    # *************switch end**************
     return False
 
 
