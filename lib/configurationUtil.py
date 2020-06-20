@@ -42,7 +42,7 @@ def set_config(yaml_config):
         .replace("  exclude:",          "    exclude:")\
         .replace("    - 192.168.3.1",   "      - 192.168.3.1")\
         .replace("  consider_home",     "    consider_home")\
-        .replace("  targer_sensor:",    "    targer_sensor:")\
+        .replace("  target_sensor:",    "    target_sensor:")\
         .replace("  scan_interval:",    "    scan_interval:")
     yaml_file.close()
     yaml_file = open(yaml_path, 'w', encoding='utf8')
