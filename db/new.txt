@@ -1,0 +1,14 @@
+# Text to speech
+tts:
+  - platform: baidu
+    app_id: 16375302
+    api_key: bcFIgL82GlzMxsr72fSmv08e
+    secret_key: jGBUnDu22HpaguBA88w2GPRTVacn3T5X
+    speed: 5
+    pitch: 5
+    volume: 5
+    person: 4
+
+media_player :
+  - platform: vlc
+    name: vlc
