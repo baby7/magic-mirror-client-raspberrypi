@@ -48,7 +48,15 @@ def set_config(yaml_config):
         .replace("  pin:",                  "    pin:")\
         .replace("  monitored_conditions:", "    monitored_conditions:")\
         .replace("    - temperature",       "      - temperature")\
-        .replace("    - humidity",          "      - humidity")
+        .replace("    - humidity",          "      - humidity")\
+        .replace("  app_id:",               "    app_id:")\
+        .replace("  api_key:",              "    api_key:")\
+        .replace("  secret_key:",           "    secret_key:")\
+        .replace("  speed:",                "    speed:")\
+        .replace("  pitch:",                "    pitch:")\
+        .replace("  volume:",               "    volume:")\
+        .replace("  person:",               "    person:")\
+        .replace("  pin:",                  "    pin:")
     yaml_file.close()
     yaml_file = open(yaml_path, 'w', encoding='utf8')
     yaml_file.write(yaml_config)
