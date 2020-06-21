@@ -88,13 +88,27 @@ def commend(text=""):
     for switch in switch_list:
         if text == (switch['name'] + "最高亮度"):
             hassapi.set_light_brightness(switch['name'], 255)
+            speak("已调至" + "最高亮度")
+            return True
         if text == (switch['name'] + "最低亮度"):
             hassapi.set_light_brightness(switch['name'], 3)
+            speak("已调至" + "最低亮度")
+            return True
         if text == (switch['name'] + "最高色温"):
             hassapi.set_light_color_temp(switch['name'], 175)
+            speak("已调至" + "最高色温")
+            return True
         if text == (switch['name'] + "最低色温"):
             hassapi.set_light_color_temp(switch['name'], 333)
+            speak("已调至" + "最低色温")
+            return True
     # ************* light end   **************
+    # ************* sensor start *************
+    if text == "室内环境信息":
+        temp, hum = hassapi.get_temp_and_hum("dht_sensor_temperature", "dht_sensor_humidity")
+        speak("室内当前温度为" + str(int(float(temp))) + "度，湿度为百分之" + str(int(float(hum))))
+        return True
+    # ************* sensor end   *************
     return False
 
 

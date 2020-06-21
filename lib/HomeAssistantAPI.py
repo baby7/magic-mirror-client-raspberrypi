@@ -6,24 +6,25 @@ import requests
 
 base_url = "http://192.168.3.11:8123/"
 headers = {
-    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5NGIzZjRlYzIwOTA0ZTJkYTAzYjQyMTYzMDk1MmRlYSIsImlhdCI6MTU5MjU4NDEyNCwiZXhwIjoxOTA3OTQ0MTI0fQ.jTtjvLPvFDL5WXu1ByI_1liUYmxYk6iib7I93KAhLRg",
+    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhOWQ1NmVjMjUzMzY0YmViYTNmNGEzNWYwZmYxMmQ3YiIsImlhdCI6MTU5MjcxMjE0OCwiZXhwIjoxOTA4MDcyMTQ4fQ.-ZH_WywatucaQNzCWq1rXHbjfg6hK2lvutcq8__I1q4",
     "content-type": "application/json",
 }
 
 
 # 调用服务
 def call_service(model, service, json):
-    print("call_service")
     requests.post(base_url + "api/services/" + model + "/" + service, headers=headers, json=json)
 
 
 # 获取状态
 def get_state(entity_id):
-    print("get_state")
     res = requests.get(base_url + "api/states/" + entity_id, headers=headers, json={})
     return res.json()
 
 
+# **********************************************************************************************************************
+# 模块：灯
+# **********************************************************************************************************************
 # 设置灯亮度[3-255]
 def set_light_brightness(entity_id, brightness):
     json = {
@@ -50,6 +51,9 @@ def set_light_color_temp(entity_id, color_temp):
         call_service("light", "toggle", json)
 
 
+# **********************************************************************************************************************
+# 模块：开关
+# **********************************************************************************************************************
 # 打开开关
 def open_switch(entity_id):
     json = {
@@ -64,3 +68,12 @@ def close_switch(entity_id):
         "entity_id": "switch." + entity_id,
     }
     call_service("switch", "turn_off", json)
+
+
+# **********************************************************************************************************************
+# 模块：传感器
+# **********************************************************************************************************************
+# 获取温湿度
+def get_temp_and_hum(entity_id_temp, entity_id_hum):
+    return (get_state("sensor." + entity_id_temp)["state"],
+            get_state("sensor." + entity_id_hum)["state"])
