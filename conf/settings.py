@@ -60,9 +60,9 @@ BAIDU_SECRET_KEY = 'jGBUnDu22HpaguBA88w2GPRTVacn3T5X'
 # spd:  语速，取值0 - 15，默认为5中语速
 # pit:  音调，取值0 - 15，默认为5中语调
 # vol'  音量，取值0 - 15，默认为5中音量
-BAIDU_PER = 4
+BAIDU_PER = 0
 BAIDU_SPD = 5
-BAIDU_PIT = 5
+BAIDU_PIT = 0
 BAIDU_VOL = 5
 # 百度语音合成语言
 BAIDU_LANGUAGE = 'zh'
