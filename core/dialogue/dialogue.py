@@ -87,11 +87,11 @@ def commend(text=""):
     # ************* light start **************
     for switch in switch_list:
         if text == (switch['name'] + "最高亮度"):
-            hassapi.set_light_brightness(switch['switch_name'], 255)
+            hassapi.set_light_brightness(switch['switch_name'], 100)
             speak("已调至" + "最高亮度")
             return True
         if text == (switch['name'] + "最低亮度"):
-            hassapi.set_light_brightness(switch['switch_name'], 3)
+            hassapi.set_light_brightness(switch['switch_name'], 1)
             speak("已调至" + "最低亮度")
             return True
         if text == (switch['name'] + "最高色温"):
