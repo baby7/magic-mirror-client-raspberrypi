@@ -109,10 +109,6 @@ def commend(text=""):
         speak("室内当前温度为" + str(int(float(temp))) + "度，湿度为百分之" + str(int(float(hum))))
         return True
     # ************* sensor end   *************
-    # ************* system start *************
-    if text == '系统升级':
-        hassapi.system_upgrade()
-    # ************* system end   *************
     return False
 
 
