@@ -3,12 +3,13 @@ import paho.mqtt.publish as publish
 import requests
 import time
 
-from lib import RPi_TH
+# from lib import RPi_TH
 from lib import RPi_FPM
 from lib import configurationUtil
 from conf import settings
 # from lib import KRUNKHOMEAPI as kapi
 # import homeassistant.remote as koapi
+from lib import HomeAssistantAPI as hassapi
 
 # kapi.api = koapi.API('127.0.0.1', '', 8123)  # HA-API:domain, password, port
 # check = kapi.apicheck()
@@ -23,15 +24,15 @@ def send_mqtt(message):
     print("send message success" + message)
 
 
-# 获取温湿度
-def get_temperature_humidity():
-    temperature, humidity, check, tmp = RPi_TH.get_temperature_humidity(settings.CHANNEL)
-    if check == tmp:
-        print("right[temperature:"+str(temperature)+",humidity:" + str(humidity) + ']')
-        return temperature, humidity
-    else:
-        print("error:[temperature:"+str(temperature)+",humidity:"+str(humidity)+",check:"+str(check)+",tmp:"+str(tmp))
-        return -30, -30
+# # 获取温湿度
+# def get_temperature_humidity():
+#     temperature, humidity, check, tmp = RPi_TH.get_temperature_humidity(settings.CHANNEL)
+#     if check == tmp:
+#         print("right[temperature:"+str(temperature)+",humidity:" + str(humidity) + ']')
+#         return temperature, humidity
+#     else:
+#         print("error:[temperature:"+str(temperature)+",humidity:"+str(humidity)+",check:"+str(check)+",tmp:"+str(tmp))
+#         return -30, -30
 
 
 # 获取PM2.5(细颗粒物)指数
@@ -79,7 +80,8 @@ def sensor(user_id, new_queue):
     num = 0
     while True:
         # 获取温湿度
-        temperature, humidity = get_temperature_humidity()
+        # temperature, humidity = get_temperature_humidity()
+        temperature, humidity = hassapi.get_temp_and_hum("dht_sensor_temperature", "dht_sensor_humidity")
         # 获取PM2.5指数
         # fine_particulate_matter = get_fine_particulate_matter()
         if temperature > -30:
