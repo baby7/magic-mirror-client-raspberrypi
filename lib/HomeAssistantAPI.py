@@ -77,3 +77,11 @@ def close_switch(entity_id):
 def get_temp_and_hum(entity_id_temp, entity_id_hum):
     return (get_state("sensor." + entity_id_temp)["state"],
             get_state("sensor." + entity_id_hum)["state"])
+
+
+# **********************************************************************************************************************
+# 模块：魔镜系统
+# **********************************************************************************************************************
+# 系统升级
+def system_upgrade():
+    call_service("shell_commend", "system_upgrade")
