@@ -112,6 +112,7 @@ def commend(text=""):
     # ************* system start *************
     if text == '系统升级':
         hassapi.system_upgrade()
+        play()
         speak("开始系统升级")
     # ************* system end   *************
     return False
