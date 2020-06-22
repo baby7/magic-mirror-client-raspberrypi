@@ -122,6 +122,8 @@ def chat(text="", user_id=1):
     r = requests.post(url, data=data)
     result = r.json()
     if result['code'] is 0:
+        if result['data'][0] == '这么标准的普通话你竟然听不懂':
+            return '不好意思，没有听清楚'
         return result['data'][0]
     return ""
 
