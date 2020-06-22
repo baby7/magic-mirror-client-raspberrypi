@@ -84,4 +84,4 @@ def get_temp_and_hum(entity_id_temp, entity_id_hum):
 # **********************************************************************************************************************
 # 系统升级
 def system_upgrade():
-    call_service("shell_commend", "system_upgrade")
+    call_service("shell_commend", "system_upgrade", {})
