@@ -95,7 +95,7 @@ def sensor(user_id, new_queue):
             # 发送面板数据
             sensor_success(message)
             # 发送环境数据
-            send_mqtt(str(message))
+            # send_mqtt(str(message))
             # # 如果温度大于三十度或者湿度大于70%就打开空调
             # if check and (temperature > 30 or humidity > 70):
             #     # 空调没在开着就打开空调
