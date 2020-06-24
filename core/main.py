@@ -23,14 +23,14 @@ def start():
         # print("Start the face recognition process")
         # p_face_detection = Process(target=face_detection.face_detection)
         # p_face_detection.start()
-        # 启动语音识别线程
-        print("Start the speech recognition process")
-        p_snowboy = Process(target=snowboy.snowboy, args=(user_id, queue))
-        p_snowboy.start()
         # 启动传感器线程
         print("Start the sensor process")
         p_sensor = Process(target=sensor.sensor, args=(user_id, queue))
         p_sensor.start()
+        # 启动语音识别线程
+        print("Start the speech recognition process")
+        p_snowboy = Process(target=snowboy.snowboy, args=(user_id, queue))
+        p_snowboy.start()
     except Exception as e:
         print("Unexpected error:", e)
     while 1:

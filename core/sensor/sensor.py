@@ -48,7 +48,6 @@ def sensor_success(data={}):
         "data": data
     }
     queue.put(json_data)
-    print(json_data)
 
 
 # 检查及修改hass核心配置文件 && 存储用户配置到json文件
