@@ -55,7 +55,9 @@ def set_config(yaml_config):
         .replace("  speed:",                "    speed:")\
         .replace("  pitch:",                "    pitch:")\
         .replace("  volume:",               "    volume:")\
-        .replace("  person:",               "    person:")
+        .replace("  person:",               "    person:")\
+        .replace("  command:",              "    command:")\
+        .replace("  control_:",             "    control_:")
     yaml_file.close()
     yaml_file = open(yaml_path, 'w', encoding='utf8')
     yaml_file.write(yaml_config)

@@ -77,3 +77,78 @@ def close_switch(entity_id):
 def get_temp_and_hum(entity_id_temp, entity_id_hum):
     return (get_state("sensor." + entity_id_temp)["state"],
             get_state("sensor." + entity_id_hum)["state"])
+
+
+# **********************************************************************************************************************
+# 模块：小米万能遥控器
+# **********************************************************************************************************************
+# 电视开关
+def control_tv(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_dianshi"
+    }
+    call_service("remote", "send_command", json)
+
+
+# 机顶盒开关
+def control_box(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_jidinghe"
+    }
+    call_service("remote", "send_command", json)
+
+
+# 风扇开关
+def control_fan(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_fengshan"
+    }
+    call_service("remote", "send_command", json)
+
+
+# 风扇风速
+def control_fan_speed(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_fengshan_fengsu"
+    }
+    call_service("remote", "send_command", json)
+
+
+# 风扇摇头
+def control_fan_head(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_fengshan_yaotou"
+    }
+    call_service("remote", "send_command", json)
+
+
+# 风扇定时
+def control_fan_time(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_fengshan_dingshi"
+    }
+    call_service("remote", "send_command", json)
+
+
+# 空调制冷
+def control_air_conditioning_cold(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_kongtiao_zhileng"
+    }
+    call_service("remote", "send_command", json)
+
+
+# 空调除湿
+def control_air_conditioning_wet(entity_id):
+    json = {
+        "entity_id": "remote." + entity_id,
+        "command": "control_kongtiao_chushi"
+    }
+    call_service("remote", "send_command", json)

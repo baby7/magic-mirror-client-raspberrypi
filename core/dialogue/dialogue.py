@@ -75,11 +75,11 @@ def listen():
 def commend(text=""):
     # ************ switch start *************
     for switch in switch_list:
-        if text == ("打开" + switch['name']):
+        if judgment_open(text, switch['name']):
             hassapi.open_switch(switch['switch_name'])
             speak("已经" + text)
             return True
-        if text == ("关闭" + switch['name']):
+        if judgment_close(text, switch['name']):
             hassapi.close_switch(switch['switch_name'])
             speak("已经" + text)
             return True
@@ -104,11 +104,47 @@ def commend(text=""):
             return True
     # ************* light end   **************
     # ************* sensor start *************
-    if text == "室内环境信息":
+    if text == "室内环境信息" or text == "房间环境信息" or text == "室内温湿度" or text == "房间温湿度":
         temp, hum = hassapi.get_temp_and_hum("dht_sensor_temperature", "dht_sensor_humidity")
         speak("室内当前温度为" + str(int(float(temp))) + "度，湿度为百分之" + str(int(float(hum))))
         return True
     # ************* sensor end   *************
+    # ************ control start *************
+    control_name = "xiaomi_yaokongqi"
+    if text == "我要看电视" or judgment_open(text, "电视") or judgment_close(text, "电视"):
+        hassapi.control_box(control_name)
+        hassapi.control_tv(control_name)
+        speak("已经执行命令")
+    if text == "我要吹风扇" or judgment_open(text, "风扇") or judgment_close(text, "风扇"):
+        hassapi.control_fan(control_name)
+        speak("已经执行命令")
+    if text == "风扇风速" or text == "调整风扇风速" or text == "风扇转速" or text == "调整风扇转速":
+        hassapi.control_fan_speed(control_name)
+        speak("已经执行命令")
+    if text == "风扇摇头":
+        hassapi.control_fan_head(control_name)
+        speak("已经执行命令")
+    if text == "空调制冷" or text == "制冷":
+        hassapi.control_air_conditioning_cold(control_name)
+        speak("开始空调制冷")
+    if text == "空调除湿" or text == "除湿":
+        hassapi.control_air_conditioning_wet(control_name)
+        speak("开始空调除湿")
+    # ************ control end   *************
+    return False
+
+
+# 开启语言判断
+def judgment_open(text, entity):
+    if text == ("打开" + entity) or text == ("开" + entity) or text == ("开开" + entity) or text == ("开启" + entity):
+        return True
+    return False
+
+
+# 关闭语言判断
+def judgment_close(text, entity):
+    if text == ("关闭" + entity) or text == ("关" + entity) or text == ("关掉" + entity):
+        return True
     return False
 
 
