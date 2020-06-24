@@ -45,7 +45,7 @@ FOCUS_FACE = "haarcascade_frontalface_alt"
 MODEL = DIALOGUE_DIR + 'magicmirror.pmdl'
 
 # 热词唤醒灵敏度
-SENSITIVITY = 0.4
+SENSITIVITY = 0.5
 
 # 百度语音API密钥
 BAIDU_APP_ID = '16375302'
