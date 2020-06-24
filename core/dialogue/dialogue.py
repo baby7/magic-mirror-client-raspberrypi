@@ -115,21 +115,27 @@ def commend(text=""):
         hassapi.control_box(control_name)
         hassapi.control_tv(control_name)
         speak("已经执行命令")
+        return True
     if text == "我要吹风扇" or judgment_open(text, "风扇") or judgment_close(text, "风扇"):
         hassapi.control_fan(control_name)
         speak("已经执行命令")
+        return True
     if text == "风扇风速" or text == "调整风扇风速" or text == "风扇转速" or text == "调整风扇转速":
         hassapi.control_fan_speed(control_name)
         speak("已经执行命令")
+        return True
     if text == "风扇摇头":
         hassapi.control_fan_head(control_name)
         speak("已经执行命令")
+        return True
     if text == "空调制冷" or text == "制冷":
         hassapi.control_air_conditioning_cold(control_name)
         speak("开始空调制冷")
+        return True
     if text == "空调除湿" or text == "除湿":
         hassapi.control_air_conditioning_wet(control_name)
         speak("开始空调除湿")
+        return True
     # ************ control end   *************
     return False
 
