@@ -84,23 +84,22 @@ def sensor(user_id, new_queue):
         temperature, humidity = hassapi.get_temp_and_hum("dht_sensor_temperature", "dht_sensor_humidity")
         # 获取PM2.5指数
         # fine_particulate_matter = get_fine_particulate_matter()
-        if temperature > -30:
-            # 合成数据
-            message = {
-                "userId": user_id,
-                'temp': str(temperature),
-                'humidity': str(humidity),
-                "createTime": int(round(time.time() * 1000))
-            }
-            # 发送面板数据
-            sensor_success(message)
-            # 发送环境数据
-            # send_mqtt(str(message))
-            # # 如果温度大于三十度或者湿度大于70%就打开空调
-            # if check and (temperature > 30 or humidity > 70):
-            #     # 空调没在开着就打开空调
-            #     if not kapi.get_switch_state('airconditioning'):
-            #         kapi.open_switch('airconditioning')
-            #         kapi.endscript()
+        # 合成数据
+        message = {
+            "userId": user_id,
+            'temp': str(temperature),
+            'humidity': str(humidity),
+            "createTime": int(round(time.time() * 1000))
+        }
+        # 发送面板数据
+        sensor_success(message)
+        # 发送环境数据
+        # send_mqtt(str(message))
+        # # 如果温度大于三十度或者湿度大于70%就打开空调
+        # if check and (temperature > 30 or humidity > 70):
+        #     # 空调没在开着就打开空调
+        #     if not kapi.get_switch_state('airconditioning'):
+        #         kapi.open_switch('airconditioning')
+        #         kapi.endscript()
         check_update_configuration(user_id)
         time.sleep(60)
