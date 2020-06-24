@@ -48,6 +48,7 @@ def sensor_success(data={}):
         "data": data
     }
     queue.put(json_data)
+    print(json_data)
 
 
 # 检查及修改hass核心配置文件 && 存储用户配置到json文件
@@ -102,4 +103,4 @@ def sensor(user_id, new_queue):
         #         kapi.open_switch('airconditioning')
         #         kapi.endscript()
         check_update_configuration(user_id)
-        time.sleep(60)
+        time.sleep(20)
