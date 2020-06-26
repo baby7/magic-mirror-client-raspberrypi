@@ -165,7 +165,8 @@ def chat(text="", user_id=1):
     result = r.json()
     if result['code'] is 0:
         if result['data'][0] == '这么标准的普通话你竟然听不懂' or result['data'][0] == '我说没什么'\
-                or result['data'][0] == '我说没什么!'or result['data'][0] == '我说没什么！':
+                or result['data'][0] == '我说没什么!' or result['data'][0] == '我说没什么！'\
+                or result['data'][0] == '都说过几遍了，怎么还要问呐' or result['data'][0] == '都说过几遍了,怎么还要问呐':
             return '没听清'
         return result['data'][0]
     return ""
