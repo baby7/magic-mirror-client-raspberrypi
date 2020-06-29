@@ -60,8 +60,8 @@ def set_config(yaml_config):
         .replace("  control_",              "    control_")\
         .replace("    - 192.168.3.3",       "      - 192.168.3.3")\
         .replace("    - 192.168.3.8",       "      - 192.168.3.8")\
-        .replace("  unit_of_measurement:",  "    unit_of_measurement")\
-        .replace("  value_template",        "    value_template")
+        .replace("  unit_of_measurement:",  "    unit_of_measurement:")\
+        .replace("  value_template:",        "    value_template:")
     yaml_file.close()
     yaml_file = open(yaml_path, 'w', encoding='utf8')
     yaml_file.write(yaml_config)
