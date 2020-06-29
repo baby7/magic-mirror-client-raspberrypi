@@ -58,7 +58,8 @@ def set_config(yaml_config):
         .replace("  person:",               "    person:")\
         .replace("  command",               "    command")\
         .replace("  control_",              "    control_")\
-        .replace("    - 192.168",           "      - 192.168")\
+        .replace("    - 192.168.3.3",       "      - 192.168.3.3")\
+        .replace("    - 192.168.3.8",       "      - 192.168.3.8")\
         .replace("  unit_of_measurement:",  "    unit_of_measurement")\
         .replace("  value_template",        "    value_template")
     yaml_file.close()
