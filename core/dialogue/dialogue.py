@@ -77,30 +77,30 @@ def commend(text=""):
     for switch in switch_list:
         if judgment_open(text, switch['name']):
             hassapi.open_switch(switch['switch_name'])
-            speak("已经" + text)
+            speak("好的")
             return True
         if judgment_close(text, switch['name']):
             hassapi.close_switch(switch['switch_name'])
-            speak("已经" + text)
+            speak("好的")
             return True
     # ************* switch end  **************
     # ************* light start **************
     for switch in switch_list:
         if text == (switch['name'] + "最高亮度"):
             hassapi.set_light_brightness(switch['switch_name'], 100)
-            speak("已调至" + "最高亮度")
+            speak("好的")
             return True
         if text == (switch['name'] + "最低亮度"):
             hassapi.set_light_brightness(switch['switch_name'], 1)
-            speak("已调至" + "最低亮度")
+            speak("好的")
             return True
         if text == (switch['name'] + "最高色温"):
             hassapi.set_light_color_temp(switch['switch_name'], 175)
-            speak("已调至" + "最高色温")
+            speak("好的")
             return True
         if text == (switch['name'] + "最低色温"):
             hassapi.set_light_color_temp(switch['switch_name'], 333)
-            speak("已调至" + "最低色温")
+            speak("好的")
             return True
     # ************* light end   **************
     # ************* sensor start *************
@@ -114,27 +114,27 @@ def commend(text=""):
     if text == "我要看电视" or judgment_open(text, "电视") or judgment_close(text, "电视"):
         hassapi.control_box(control_name)
         hassapi.control_tv(control_name)
-        speak("已经执行命令")
+        speak("好的")
         return True
     if text == "我要吹风扇" or judgment_open(text, "风扇") or judgment_close(text, "风扇"):
         hassapi.control_fan(control_name)
-        speak("已经执行命令")
+        speak("好的")
         return True
     if text == "风扇风速" or text == "调整风扇风速" or text == "风扇转速" or text == "调整风扇转速":
         hassapi.control_fan_speed(control_name)
-        speak("已经执行命令")
+        speak("好的")
         return True
     if text == "风扇摇头":
         hassapi.control_fan_head(control_name)
-        speak("已经执行命令")
+        speak("好的")
         return True
     if text == "空调制冷" or text == "制冷":
         hassapi.control_air_conditioning_cold(control_name)
-        speak("开始空调制冷")
+        speak("好的")
         return True
     if text == "空调除湿" or text == "除湿":
         hassapi.control_air_conditioning_wet(control_name)
-        speak("开始空调除湿")
+        speak("好的")
         return True
     # ************ control end   *************
     return False
