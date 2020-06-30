@@ -101,5 +101,5 @@ def sensor(user_id, new_queue):
         #     if not kapi.get_switch_state('airconditioning'):
         #         kapi.open_switch('airconditioning')
         #         kapi.endscript()
-        check_update_configuration(user_id)
+        # check_update_configuration(user_id)
         time.sleep(20)
