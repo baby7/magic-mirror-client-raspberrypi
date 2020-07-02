@@ -147,6 +147,7 @@ def judgment_open(text, entity):
     text = text.replace("给爷", "")
     if text == ("打开" + entity) or text == ("开" + entity) or text == ("开开" + entity) or text == ("开启" + entity):
         return True
+    text = text.replace("把", "")
     if text == (entity + "打开") or text == (entity + "开") or text == (entity + "开开") or text == (entity + "开启"):
         return True
     return False
@@ -159,6 +160,7 @@ def judgment_close(text, entity):
     text = text.replace("给爷", "")
     if text == ("关闭" + entity) or text == ("关" + entity) or text == ("关掉" + entity):
         return True
+    text = text.replace("把", "")
     if text == (entity + "关闭") or text == (entity + "关") or text == (entity + "关掉"):
         return True
     return False
